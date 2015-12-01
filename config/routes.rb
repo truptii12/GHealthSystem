@@ -1,11 +1,32 @@
 Rails.application.routes.draw do
+  resources :doctors
   resources :patients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'patients#index'
+  controller :patients do
+  get 'patients/show'     => :show
+  get 'patients/delete'   => :new
+  get 'patients/edit/:id' => :edit
+  get 'patients/delete'   => :index
+  post 'patients/show'     => :show
+  post 'patients/delete'   => :new
+  post 'patients/edit/:id' => :edit
+  post 'patients/delete'   => :index
+end
 
+controller :doctors do
+  get 'doctors/show'     => :show
+  get 'doctors/delete'   => :new
+  get 'doctors/edit/:id' => :edit
+  get 'doctors/delete'   => :index
+  post 'doctors/show'     => :show
+  post 'doctors/delete'   => :new
+  post 'doctors/edit/:id' => :edit
+  post 'doctors/delete'   => :index
+end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
