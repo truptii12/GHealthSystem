@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :appointments
   devise_for :users
   #devise_for :users
   get 'home/index'
 
-  resources :appointments
   resources :doctors
   resources :patients
   # The priority is based upon order of creation: first created -> highest priority.

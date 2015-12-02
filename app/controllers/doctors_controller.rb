@@ -16,7 +16,12 @@ class DoctorsController < ApplicationController
   def new
     @doctor = Doctor.new
   end
-
+    def content
+      @doctor= Doctor.paginate(:page => params[:page], :per_page => 12)
+      respond_to do |format|
+        format.html # content.html.erb
+    end
+  end
   # GET /doctors/1/edit
   def edit
   end
