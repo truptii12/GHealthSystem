@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202024021) do
+ActiveRecord::Schema.define(version: 20151202030310) do
 
   create_table "appointments", force: :cascade do |t|
     t.date     "appointmentdate"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20151202024021) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  add_index "appointments", ["doctor_id"], name: "index_appointments_on_doctor_id"
+  add_index "appointments", ["patient_id"], name: "index_appointments_on_patient_id"
 
   create_table "doctors", force: :cascade do |t|
     t.string   "dname"

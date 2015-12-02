@@ -2,8 +2,7 @@ class CreateAppointments < ActiveRecord::Migration
   def change
     create_table :appointments do |t|
       t.date :appointmentdate
-      t.time :starTime
-      t.time :endTime
+      t.time :startTime
       t.string :comment
       t.references :patient, index: true, foreign_key: true
       t.references :doctor, index: true, foreign_key: true
