@@ -3,6 +3,18 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments
   # GET /appointments.json
+   def isAvailable
+     @appointments_list = Appointment.all
+    @appointments_list.each do |appointment|
+      if((appointment.appointmentdate = 'self.appointmentdate')) 
+         puts " Duration clash "
+        return true
+      else
+        return false
+      end
+    end
+  end
+  
   def index
     @appointments = Appointment.all
   end
@@ -14,7 +26,13 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
+     #respond_to do |format|
+  #  if(!self.isAvailable)
     @appointment = Appointment.new
+   # else
+    #  format.html { redirect_to @appointment, notice: 'Appointment was successfully_created.' }
+     #   format.json { render :show, status: :created, location: @appointment }
+    #end
   end
 
   # GET /appointments/1/edit
@@ -24,18 +42,33 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new(appointment_params)
-
-    respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+   
+    @appointment = Appointment.new()
+    @appointment.startTime = params[:appointment][:startTime]
+    @appointment.comment = params[:appointment][:comment]
+    @appointment.patient_id = params[:appointment][:patient_id]
+    @appointment.doctor_id = params[:appointment][:doctor_id]
+    @appointment.appointmentdate = params[:appointment][:appointmentdate]
+    
+     respond_to do |format|
+        @appointments_list = Appointment.all
+        @appointments_list.each do |appointment|
+        if((appointment.appointmentdate = 'self.appointmentdate')) 
+           puts " Duration clash "
+            format.html { redirect_to @appointment, notice: 'Appointment slot already booked.' }
+          format.json { render :show, status: :created, location: @appointment }
+        else if @appointment.save
+          format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+          format.json { render :show, status: :created, location: @appointment }
+        else
+          format.html { render :new }
+          format.json { render json: @appointment.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end
+
 
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
@@ -60,7 +93,8 @@ class AppointmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+ 
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_appointment
@@ -71,4 +105,7 @@ class AppointmentsController < ApplicationController
     def appointment_params
       params.require(:appointment).permit(:appointmentdate, :startTime, :comment, :patient_id, :doctor_id)
     end
-end
+    
+    
+  end
+
