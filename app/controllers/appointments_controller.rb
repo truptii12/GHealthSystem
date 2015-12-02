@@ -43,27 +43,36 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
    
-    @appointment = Appointment.new()
-    @appointment.startTime = params[:appointment][:startTime]
-    @appointment.comment = params[:appointment][:comment]
-    @appointment.patient_id = params[:appointment][:patient_id]
-    @appointment.doctor_id = params[:appointment][:doctor_id]
-    @appointment.appointmentdate = params[:appointment][:appointmentdate]
+    @appointment = Appointment.new(appointment_params)
+  #  @appointment.startTime = params[:appointment][:startTime]
+   # @appointment.comment = params[:appointment][:comment]
+  #  @appointment.patient_id = params[:appointment][:patient_id]
+   # @appointment.doctor_id = params[:appointment][:doctor_id]
+    #@appointment.appointmentdate = params[:appointment][:appointmentdate]
     
      respond_to do |format|
         @appointments_list = Appointment.all
-        @appointments_list.each do |appointment|
+        if(@appointmenent_list.nil?)
+          puts "***no appointments****"
+          if @appointment.save then
+            format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+            format.json { render :show, status: :created, location: @appointment }
+          end
+        end 
+        
+          
+          @appointments_list.each do |appointment|
         if((appointment.appointmentdate = 'self.appointmentdate')) 
            puts " Duration clash "
             format.html { redirect_to @appointment, notice: 'Appointment slot already booked.' }
-          format.json { render :show, status: :created, location: @appointment }
+          format.json { render :show, status: :unprocessable_entity }
         else if @appointment.save
           format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
           format.json { render :show, status: :created, location: @appointment }
         else
           format.html { render :new }
           format.json { render json: @appointment.errors, status: :unprocessable_entity }
-          end
+        end
         end
       end
     end
@@ -106,6 +115,6 @@ class AppointmentsController < ApplicationController
       params.require(:appointment).permit(:appointmentdate, :startTime, :comment, :patient_id, :doctor_id)
     end
     
-    
-  end
+   
+end
 
