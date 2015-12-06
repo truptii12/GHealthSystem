@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :admins
   resources :appointments
   devise_for :users
   #devise_for :users
   get 'home/index'
 
-  resources :doctors
-  resources :patients
+  resources :doctors do
+  resources:appointments
+end
+
+  resources :patients do
+    resources:appointments
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -20,6 +26,17 @@ Rails.application.routes.draw do
   post 'patients/delete'   => :new
   post 'patients/edit/:id' => :edit
   post 'patients/delete'   => :index
+end
+
+controller :users do
+  get 'users/show'     => :show
+  get 'users/delete'   => :new
+  get 'users/edit/:id' => :edit
+  get 'users/delete'   => :index
+  post 'users/show'     => :show
+  post 'users/delete'   => :new
+  post 'users/edit/:id' => :edit
+  post 'users/delete'   => :index
 end
 
 controller :doctors do

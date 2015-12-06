@@ -9,7 +9,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
    def create
+     puts "hello"
      @user=super
+     
       WelcomeMail.welcome_email(@user).deliver_now
       puts "user created ... mail in progress"
    end

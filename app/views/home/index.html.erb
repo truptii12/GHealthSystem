@@ -1,2 +1,5 @@
 <h1>Global Health System</h1>
-<%= link_to 'Back', appointments_path %>
+<%= link_to 'List Doctors', doctors_path %>
+<% if current_user && current_user.try(:admin?) %>
+<%= link_to 'New Doctor', new_doctor_path %>
+<% end %>

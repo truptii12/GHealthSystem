@@ -15,15 +15,12 @@
   <%= @appointment.comment %>
 </p>
 
-<p>
-  <strong>Patient:</strong>
-  <%= @appointment.patient.name %>
-</p>
+
 
 <p>
   <strong>Doctor:</strong>
   <%= @appointment.doctor.dname %>
 </p>
 
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
+<%= link_to 'Edit', edit_doctor_appointment_path(@doctor, @appointment) %> |
+<%= link_to 'Book another appointment for same doctor', new_doctor_appointment_path(@doctor) %>

@@ -22,8 +22,8 @@
         <td><%= appointment.comment %></td>
         <td><%= appointment.patient_id %></td>
         <td><%= appointment.doctor_id %></td>
-        <td><%= link_to 'Show', appointment %></td>
-        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Show', doctor_appointment_path(@doctor, appointment) %></td>
+        <td><%= link_to 'Edit', edit_doctor_appointment_path(@doctor, appointment) %></td>
         <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -32,6 +32,12 @@
 
 <br>
 
-<%= link_to 'New Appointment', new_appointment_path %>
-  <%= link_to 'List Doctors', doctors_path %>
-    <%= link_to 'List Patients', patients_path %>
+
+<%= link_to 'New Appointment', doctors_path %>
+
+ 
+   
+ 
+ 
+  
+    

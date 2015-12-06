@@ -1,6 +1,7 @@
 class DoctorsController < ApplicationController
-  before_action :set_doctor, only: [:show, :edit, :update, :destroy]
-
+  before_filter :set_doctor, only: [:show, :edit, :update, :destroy]
+ before_filter :authenticate_user!
+  #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   # GET /doctors
   # GET /doctors.json
   def index

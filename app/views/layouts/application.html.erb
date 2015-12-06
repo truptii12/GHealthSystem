@@ -12,13 +12,12 @@
 <%= yield %>
 <nav class="navbar navbar-inverse">
   <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Devise Demo', root_path, class: 'navbar-brand' %>
-    </div>
+    
     <div id="navbar">
       <ul class="nav navbar-nav">
-        
-        <li><%= link_to 'Home', appointments_path %></li>
+       <% if user_signed_in? %> 
+        <li><%= link_to 'Home' %></li>
+          <% end %>
       </ul>
      
       <ul class="nav navbar-nav pull-right">
