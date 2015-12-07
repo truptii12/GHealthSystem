@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204134731) do
+ActiveRecord::Schema.define(version: 20151207023722) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "kulkarni.trupti.v.19@gmail.com", null: false
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20151204134731) do
     t.integer  "default_appoinment_duration"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "contact"
+    t.integer  "NPI"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 20151204134731) do
     t.date     "BOB"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "password"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 20151204134731) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
-    t.string   "users"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -31,9 +31,13 @@ class DoctorsController < ApplicationController
   # POST /doctors.json
   def create
     @doctor = Doctor.new(doctor_params)
+     
+        
 
     respond_to do |format|
       if @doctor.save
+        @password="11111111"
+        User.create!({:email => @doctor.email, :role => ["doctor"], :password => @password, :password_confirmation => @password })
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
         format.json { render :show, status: :created, location: @doctor }
       else

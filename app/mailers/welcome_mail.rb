@@ -6,6 +6,6 @@ class WelcomeMail < ApplicationMailer
         @user = user
        # @url  = "http://example.com/login"
        puts @user.inspect
-        mail(:to => @user.email, :subject => "Welcome to My Awesome Site")
+        mail(:to => @user, :subject => "Welcome to My Awesome Site")
     end 
 end
