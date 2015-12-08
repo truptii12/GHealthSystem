@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DoctorsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
     @doctor = doctors(:one)
   end

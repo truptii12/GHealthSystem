@@ -14,6 +14,9 @@
   <strong>Bob:</strong>
   <%= @patient.BOB %>
 </p>
-
+<%if current_user.role == "doctor" %>
+        <%= link_to 'Back', patients_path %>
+<% else %>
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>
+        <%= link_to 'Back', patients_path %>
+<% end %>

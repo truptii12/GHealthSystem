@@ -6,5 +6,5 @@
 #
 
 one:
-  email: "sunit@gmail.com"
-  encrypted_password: "12345678"
+  email: sunit@gmail.com
+  encrypted_password: 12345678

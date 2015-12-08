@@ -22,6 +22,7 @@
   </div>
   <div class="actions">
     <%= WelcomeMail.welcome_email(:email).deliver_now %>
+    <%= f.role = "patient" %>
     <%= f.submit "Sign up" %>
   </div>
 <% end %>

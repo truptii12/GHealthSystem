@@ -1,6 +1,9 @@
 class DoctorsController < ApplicationController
   before_filter :set_doctor, only: [:show, :edit, :update, :destroy]
  before_filter :authenticate_user!
+ #validates :dname, presence: true
+ #validates :email, presence: true
+ # validates :contact, length: { is: 10}
   #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   # GET /doctors
   # GET /doctors.json
@@ -21,8 +24,8 @@ class DoctorsController < ApplicationController
       @doctor= Doctor.paginate(:page => params[:page], :per_page => 12)
       respond_to do |format|
         format.html # content.html.erb
-    end
-  end
+      end
+    end  
   # GET /doctors/1/edit
   def edit
   end
@@ -37,7 +40,7 @@ class DoctorsController < ApplicationController
     respond_to do |format|
       if @doctor.save
         @password="11111111"
-        User.create!({:email => @doctor.email, :role => ["doctor"], :password => @password, :password_confirmation => @password })
+        User.create!({:email => @doctor.email, :role => "doctor", :password => @password, :password_confirmation => @password })
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
         format.json { render :show, status: :created, location: @doctor }
       else

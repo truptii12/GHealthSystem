@@ -1,9 +1,13 @@
 <h1>Global Health System</h1>
-<%= link_to 'List Doctors', doctors_path %>
 
-    
+<%if current_user && current_user.try(:admin?) do %>
 
-    <% if current_user && current_user.try(:admin?) %>
     <%= link_to 'New Doctor', new_doctor_path %>
-
+    <%= link_to 'List Doctors', doctors_path %>
+    <% end %>
+    <% else if current_user && current_user.role == "doctor" %>
+    <%= link_to 'List Patient', patients_path %>
+    <% else  %>
+<%= link_to 'List Doctors', doctors_path %>
 <% end %>
+<% end%>

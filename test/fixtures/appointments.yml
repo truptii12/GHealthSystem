@@ -4,12 +4,12 @@ one:
   appointmentdate: 2015-12-02
   startTime: 2015-12-02 03:03:10
   comment: MyString
-  patient_id: 
-  doctor_id: 
+  patient_id: 1
+  doctor_id: 1
 
 two:
   appointmentdate: 2015-12-02
   startTime: 2015-12-02 03:03:10
   comment: MyString
-  patient_id: 
-  doctor_id: 
+  patient_id: 1
+  doctor_id: 1
