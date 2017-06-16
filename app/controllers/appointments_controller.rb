@@ -19,7 +19,7 @@ class AppointmentsController < ApplicationController
    end
   
   def index
-  #  @appointments = Appointment.all
+    @appointments = Appointment.all
     @doctor = Doctor.find(params[:doctor_id])
     @appointments = @doctor.appointments
   end
@@ -27,8 +27,9 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-   @doctor = Doctor.find(params[:doctor_id])
-   @appointment = @doctor.appointments.find(params[:id])
+   @patient = Doctor.find(params[:patient_id])
+   
+   @appointment = @patient.appointments.find(params[:id])
   end
 
   # GET /appointments/new

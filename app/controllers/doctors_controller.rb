@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
   before_filter :set_doctor, only: [:show, :edit, :update, :destroy]
- before_filter :authenticate_user!
+ #before_filter :authenticate_user!
  #validates :dname, presence: true
  #validates :email, presence: true
  # validates :contact, length: { is: 10}
@@ -8,6 +8,7 @@ class DoctorsController < ApplicationController
   # GET /doctors
   # GET /doctors.json
   def index
+    
     @doctors = Doctor.all
   end
 
@@ -18,6 +19,7 @@ class DoctorsController < ApplicationController
 
   # GET /doctors/new
   def new
+   #  before_filter :authenticate_user, :only => [:account_settings, :set_account_info]
     @doctor = Doctor.new
   end
     def content
@@ -39,10 +41,12 @@ class DoctorsController < ApplicationController
 
     respond_to do |format|
       if @doctor.save
-        @password="11111111"
+        generated_password = Devise.friendly_token.first(8)
+        @password=generated_password
         User.create!({:email => @doctor.email, :role => "doctor", :password => @password, :password_confirmation => @password })
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
         format.json { render :show, status: :created, location: @doctor }
+        RegistrationMailer.welcome(user, generated_password).deliver
       else
         format.html { render :new }
         format.json { render json: @doctor.errors, status: :unprocessable_entity }

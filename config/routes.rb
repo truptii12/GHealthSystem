@@ -1,3 +1,5 @@
+
+
 Rails.application.routes.draw do
   devise_for :admins
   resources :appointments
@@ -5,9 +7,9 @@ Rails.application.routes.draw do
   #devise_for :users
   get 'home/index'
 
-  resources :doctors do
-  resources:appointments
-end
+#  resources :doctors do
+ # resources:appointments
+#end
 
   resources :patients do
     resources:appointments
@@ -58,6 +60,10 @@ controller :appointments do
   post 'appointments/delete'   => :new
   post 'appointments/edit/:id' => :edit
   post 'appointments/delete'   => :index
+end
+
+controller:home do
+  get '/home'  => 'home#index'
 end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
